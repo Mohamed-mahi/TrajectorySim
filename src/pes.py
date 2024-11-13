@@ -11,19 +11,19 @@ class PES:
         self.lattice_constant = lattice_constant
 
     def u(self, x, y):
-        theta_x = 2. * np.pi * x / self.lattice_constant
-        theta_y = 2. * np.pi * y / (self.lattice_constant * np.sqrt(3.))
-        return 2. * (3. - 2. * np.cos(theta_x) * np.cos(theta_y) - np.cos(2. * theta_y)) / 9.
+        theta_x = 2.0 * np.pi * x / self.lattice_constant
+        theta_y = 2.0 * np.pi * y / (self.lattice_constant * np.sqrt(3.0))
+        return 2.0 * (3.0 - 2.0 * np.cos(theta_x) * np.cos(theta_y) - np.cos(2.0 * theta_y)) / 9.0
 
     def V(self, x, y, z):
         u_ = self.u(x, y)
         C0 = self.C0_max - self.Delta_0 * u_
         C1 = self.C1_max - self.Delta_1 * u_
         C2 = self.C2_max - self.Delta_2 * u_
-        return C0 * np.exp(-z * C1) - C2 / (z**4)
+        return C0 * np.exp(-z * C1) - C2 / (z ** 4)
 
-    def force(self, x, y, z, h=1.e-6):
-        dV_dx = (self.V(x + h, y, z) - self.V(x - h, y, z)) / (2. * h)
-        dV_dy = (self.V(x, y + h, z) - self.V(x, y - h, z)) / (2. * h)
-        dV_dz = (self.V(x, y, z + h) - self.V(x, y, z - h)) / (2. * h)
+    def force(self, x, y, z, h=1.0e-6):
+        dV_dx = (self.V(x + h, y, z) - self.V(x - h, y, z)) / (2.0 * h)
+        dV_dy = (self.V(x, y + h, z) - self.V(x, y - h, z)) / (2.0 * h)
+        dV_dz = (self.V(x, y, z + h) - self.V(x, y, z - h)) / (2.0 * h)
         return -dV_dx, -dV_dy, -dV_dz
