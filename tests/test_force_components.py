@@ -1,14 +1,15 @@
-import pytest
 import numpy as np
-from src.force_components import plot_forces
+from src.force_components import plot_force_components
 
-def test_plot_forces():
-    X, Y = np.meshgrid(np.linspace(0, 2, 10), np.linspace(0, 2, 10))
-    forces_x = np.random.rand(10, 10)
-    forces_y = np.random.rand(10, 10)
-    forces_z = np.random.rand(10, 10)
-    
-    try:
-        plot_forces(X, Y, forces_x, forces_y, forces_z)
-    except Exception as e:
-        pytest.fail(f"Plotting force components failed: {e}")
+def test_plot_force_components():
+    # Create mock data
+    x = np.linspace(0, 1, 10)
+    y = np.linspace(0, 1, 10)
+    X, Y = np.meshgrid(x, y)
+    forces_x = np.random.random(X.shape)
+    forces_y = np.random.random(Y.shape)
+    forces_z = np.random.random(X.shape)
+
+    # Call the plotting function
+    plot_force_components(X, Y, forces_x, forces_y, forces_z, save_dir="test_plots/force_components/")
+    # Check that plots are saved correctly (manually or by verifying the directory exists)

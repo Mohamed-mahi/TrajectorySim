@@ -2,15 +2,34 @@ import os
 import matplotlib.pyplot as plt
 
 def plot_force_components(X, Y, forces_x, forces_y, forces_z, save_dir="plots/2_forces_components/"):
-    # Ensure the save directory exists
     os.makedirs(save_dir, exist_ok=True)
 
-    for force, label in zip([forces_x, forces_y, forces_z], ["x", "y", "z"]):
-        plt.contourf(X, Y, force.T, levels=64, cmap="jet")
-        plt.colorbar(label=f"Force ({label}-component)")
-        plt.title(f"{label.capitalize()}-Force Surface")
-        plt.xlabel("X (Å)")
-        plt.ylabel("Y (Å)")
-        plt.savefig(f"{save_dir}/force_{label}.png")
-        plt.show()  # Display the plot interactively
-        plt.close()
+    # X-component
+    plt.figure()
+    plt.contourf(X, Y, forces_x, cmap="jet")
+    plt.colorbar(label="Force X")
+    plt.title("Force X Component")
+    plt.savefig(f"{save_dir}/force_x.png")
+    if not os.getenv("PYTEST_RUNNING"):  # Skip plt.show() during tests
+        plt.show()
+    plt.close()
+
+    # Y-component
+    plt.figure()
+    plt.contourf(X, Y, forces_y, cmap="jet")
+    plt.colorbar(label="Force Y")
+    plt.title("Force Y Component")
+    plt.savefig(f"{save_dir}/force_y.png")
+    if not os.getenv("PYTEST_RUNNING"):
+        plt.show()
+    plt.close()
+
+    # Z-component
+    plt.figure()
+    plt.contourf(X, Y, forces_z, cmap="jet")
+    plt.colorbar(label="Force Z")
+    plt.title("Force Z Component")
+    plt.savefig(f"{save_dir}/force_z.png")
+    if not os.getenv("PYTEST_RUNNING"):
+        plt.show()
+    plt.close()

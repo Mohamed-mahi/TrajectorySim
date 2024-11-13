@@ -11,12 +11,7 @@ def plot_interaction_energy_y_axis(pes, y_range, z_values, save_dir="plots/3_int
     for z in z_values:
         energies = [pes.V(0, y, z) for y in y_range]
         # Add markers for each z value
-        if z == 3.0:
-            marker = 'o'  # Circles for z = 3.0
-        elif z == 3.2:
-            marker = 's'  # Squares for z = 3.2
-        elif z == 3.6:
-            marker = '^'  # Triangles for z = 3.6
+        marker = 'o' if z == 3.0 else 's' if z == 3.2 else '^'
         plt.plot(y_range, np.array(energies) * 1000, marker=marker, label=f'z = {z} Å')  # Convert to meV/atom
 
     # Titles, labels, legend, and grid
@@ -28,7 +23,8 @@ def plot_interaction_energy_y_axis(pes, y_range, z_values, save_dir="plots/3_int
 
     # Save and show
     plt.savefig(f"{save_dir}/interaction_energy_y_axis.png")
-    plt.show()
+    if not os.getenv("PYTEST_RUNNING"):
+        plt.show()
     plt.close()
 
 
@@ -61,5 +57,6 @@ def plot_interaction_energy_stacking(pes, z_values, save_dir="plots/3_interactio
 
     # Save and show
     plt.savefig(f"{save_dir}/interaction_energy_stacking.png")
-    plt.show()
+    if not os.getenv("PYTEST_RUNNING"):
+        plt.show()
     plt.close()
