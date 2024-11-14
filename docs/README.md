@@ -1,75 +1,84 @@
-TrajectorySim: Potential Energy Surface and Diffusion Simulation
-TrajectorySim is a Python-based simulation program designed to model the behavior of atoms diffusing on a Potential Energy Surface (PES). The program calculates energy and forces, evaluates interaction energy, and simulates atomic trajectories using the velocity Verlet algorithm and Langevin equation.
+# **TrajectorySim: Potential Energy Surface and Diffusion Simulation**
 
-Overview
+**TrajectorySim** is a Python-based simulation program designed to model the behavior of atoms diffusing on a **Potential Energy Surface (PES)**. The program calculates energy and forces, evaluates interaction energy, and simulates atomic trajectories using the **velocity Verlet algorithm** and **Langevin equation**.
+
+---
+
+## **Overview**
+
 Simulating atomic diffusion on surfaces can be computationally expensive due to the long timescales involved. Atoms typically remain in stable positions (PES minima) and occasionally jump to neighboring sites, overcoming potential barriers.
 
-To accelerate this process, TrajectorySim applies random lateral forces that lower the energy barriers, enabling faster transitions while maintaining realistic dynamics.
+To accelerate this process, **TrajectorySim** applies random lateral forces that lower the energy barriers, enabling faster transitions while maintaining realistic dynamics.
 
-Key Features
-PES Calculation:
+---
 
-Computes the potential energy landscape for an atom on a surface.
-Includes periodic contributions from the lattice geometry.
-Force Computation:
+## **Key Features**
 
-Derives force components (Fx,Fy,Fz) from the PES gradients.
+- **PES Calculation:** 
+  - Computes the potential energy landscape for an atom on a surface.
+  - Includes periodic contributions from the lattice geometry.
+- **Force Computation:** 
+  - Derives force components \((F_x, F_y, F_z)\) from the PES gradients.
+- **Interaction Energy:** 
+  - Evaluates energy as a function of atomic separation or stacking configuration.
+- **Trajectory Simulation:** 
+  - Simulates atomic motion using the **velocity Verlet algorithm** and **Langevin equation**.
+  - Adds thermal noise and friction for realistic dynamics.
+- **Visualization:** 
+  - Generates plots for:
+    - PES.
+    - Force components.
+    - Interaction energy.
+    - Atomic trajectories overlaid on the PES.
 
-from the PES gradients.
-Interaction Energy:
+---
 
-Evaluates energy as a function of atomic separation or stacking configuration.
-Trajectory Simulation:
+## **Theoretical Background**
 
-Simulates atomic motion using the velocity Verlet algorithm and Langevin equation.
-Adds thermal noise and friction for realistic dynamics.
-Visualization:
+### **1. Potential Energy Surface (PES)**
 
-Generates plots for:
-PES.
-Force components.
-Interaction energy.
-Atomic trajectories overlaid on the PES.
+The **Potential Energy Surface (PES)** describes the energy landscape that an atom "feels" as it interacts with a surface. It includes periodic energy variations from the lattice structure and vertical interactions (repulsion and attraction).
 
+\[
+V(x, y, z) = C_0(x, y)e^{-zC_1(x, y)} - \frac{C_2(x, y)}{z^4}
+\]
 
-Installation
-Clone the repository:
+Where:
+- \( C_i(x, y) = C_{i,\text{max}} - \Delta_i U(x, y) \)
+- \( U(x, y) = \frac{2}{9} \left[3 - 2 \cos(\theta_x) \cos(\theta_y) - \cos(2\theta_y)\right] \)
 
-git clone <repository-url>
-cd TrajectorySim
-Install dependencies:
+### **2. Langevin Dynamics**
 
-pip install -r requirements.txt
+To simulate realistic atomic motion:
+\[
+m \frac{d^2 \vec{r}}{dt^2} = -\nabla V(\vec{r}) - \gamma m \frac{d \vec{r}}{dt} + \vec{\eta}(t)
+\]
+Where:
+- \( \nabla V(\vec{r}) \): PES forces.
+- \( \gamma \): Friction coefficient.
+- \( \vec{\eta}(t) \): Random noise representing thermal effects.
 
-Usage
-For detailed usage instructions, including configuration, running simulations, and interpreting results, see USAGE.md.
+### **3. Velocity Verlet Algorithm**
 
-Code Structure
-Main Components
-PES Class: Models the PES and computes energy and forces.
-Plotting Functions:
-plot_force_components: Generates contour plots of force components.
-plot_interaction_energy_y_axis and plot_interaction_energy_stacking: Visualize interaction energy.
-Trajectory Simulation:
-Uses the velocity Verlet algorithm and Langevin equation to simulate atomic motion.
-Key Equations
-Potential Energy Surface (PES):
-Forces:
-Langevin Equation for Trajectories:
+The velocity Verlet algorithm integrates motion iteratively:
+1. Update position:
+   \[
+   \vec{r}(t + \Delta t) = \vec{r}(t) + \vec{v}(t)\Delta t + \frac{1}{2}\vec{a}(t)(\Delta t)^2
+   \]
+2. Compute new acceleration from forces:
+   \[
+   \vec{a}(t + \Delta t) = \frac{\vec{F}(t + \Delta t)}{m}
+   \]
+3. Update velocity:
+   \[
+   \vec{v}(t + \Delta t) = \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t + \Delta t)}{2}\Delta t
+   \]
 
-Results
-PES Visualization: 
-Force Components:
-Interaction Energy:
-Trajectories:
+---
 
-Testing
-Run the included tests to verify the implementation:
+## **Installation**
 
-pytest tests/
-
-References
-Reguzzoni, M., et al. (2012). Potential energy surface for graphene on graphene: Ab initio derivation, analytical description, and microscopic interpretation. Physical Review B, 86, 245434.
-
-License
-This project is licensed under the MIT License.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd TrajectorySim
