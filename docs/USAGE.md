@@ -1,7 +1,7 @@
 # **Usage Instructions** 
 This guide explains how to configure, run, and analyze the results of the **TrajectorySim** simulation program.
 
-## **2. Configuration**
+## **1. Configuration**
 
 To customize the simulation, edit the configuration file located at `config/simulation_config.py`.
 
@@ -25,14 +25,14 @@ PES_PARAMETERS = {
     "lattice_constant": 2.462,
 }
 ```
-## 3. Running the Simulation
+## 2. Running the Simulation
 Run the program using the following command:
 
 ```python main.py```
 
 If the configuration is correct, the simulation will execute and generate plots in the plots/ directory.
 
-## 4. Outputs
+## 3. Outputs
 The simulation generates multiple outputs, which are saved in the plots/ directory:
 
 ### Generated Plots
@@ -57,7 +57,7 @@ interaction_energy_stacking.png
 **Location**: plots/trajectory_output/trajectory_simulation.png
 **Description**: Particle trajectories overlaid on the PES colormap.
 
-## 5. Example Workflow
+## 4. Example Workflow
 Follow these steps to simulate and analyze atomic motion:
 
 #### Step 1: Modify Configuration
@@ -69,13 +69,13 @@ Run the program:
 #### Step 3: View Results
 Open the generated plots in the plots/ directory to visualize the results.
 
-## 6. Troubleshooting
-#### 6.1 Missing Dependencies
+## 5. Troubleshooting
+#### 5.1 Missing Dependencies
 If required libraries are missing, reinstall them using:
 
 ```pip install -r requirements.txt```
 
-#### 6.2 Slow Simulations
+#### 5.2 Slow Simulations
 If the simulation runs slowly:
 * Reduce the number of steps (nsteps) in the SIMULATION_PARAMETERS section. 
 * Lower the grid resolution in the GRID_PARAMETERS section. 
@@ -90,7 +90,7 @@ GRID_PARAMETERS = {
     "resolution": 50  # Lower resolution for faster computations
 } 
 ```
-## 7. Testing
+## 6. Testing
 To ensure that the program works correctly, run the test suite:
 
 ``` pytest tests/```
