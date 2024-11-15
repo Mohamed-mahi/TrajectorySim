@@ -10,26 +10,6 @@ Simulating atomic diffusion on surfaces can be computationally expensive due to 
 
 To accelerate this process, **TrajectorySim** applies random lateral forces that lower the energy barriers, enabling faster transitions while maintaining realistic dynamics.
 
----
-
-## **Key Features**
-
-- **PES Calculation:** 
-  - Computes the potential energy landscape for an atom on a surface.
-  - Includes periodic contributions from the lattice geometry.
-- **Force Computation:** 
-  - Derives force components \((F_x, F_y, F_z)\) from the PES gradients.
-- **Interaction Energy:** 
-  - Evaluates energy as a function of atomic separation or stacking configuration.
-- **Trajectory Simulation:** 
-  - Simulates atomic motion using the **velocity Verlet algorithm** and **Langevin equation**.
-  - Adds thermal noise and friction for realistic dynamics.
-- **Visualization:** 
-  - Generates plots for:
-    - PES.
-    - Force components.
-    - Interaction energy.
-    - Atomic trajectories overlaid on the PES.
 
 ---
 
@@ -39,46 +19,103 @@ To accelerate this process, **TrajectorySim** applies random lateral forces that
 
 The **Potential Energy Surface (PES)** describes the energy landscape that an atom "feels" as it interacts with a surface. It includes periodic energy variations from the lattice structure and vertical interactions (repulsion and attraction).
 
-\[
-V(x, y, z) = C_0(x, y)e^{-zC_1(x, y)} - \frac{C_2(x, y)}{z^4}
-\]
+![](images/pes%20v%20x,y,z%20-%20Copy.png)
 
-Where:
-- \( C_i(x, y) = C_{i,\text{max}} - \Delta_i U(x, y) \)
-- \( U(x, y) = \frac{2}{9} \left[3 - 2 \cos(\theta_x) \cos(\theta_y) - \cos(2\theta_y)\right] \)
+![](images/pes%20where.png)
+
 
 ### **2. Langevin Dynamics**
 
-To simulate realistic atomic motion:
-\[
-m \frac{d^2 \vec{r}}{dt^2} = -\nabla V(\vec{r}) - \gamma m \frac{d \vec{r}}{dt} + \vec{\eta}(t)
-\]
-Where:
-- \( \nabla V(\vec{r}) \): PES forces.
-- \( \gamma \): Friction coefficient.
-- \( \vec{\eta}(t) \): Random noise representing thermal effects.
+The motion of the atom is influenced by:
+1. **Deterministic Forces:** Derived from the PES gradients.
+2. **Random Forces (Thermal Noise):** Represented as random fluctuations to mimic thermal effects.
+3. **Friction:** Damps the motion to ensure realistic behavior.
 
+These effects are modeled using the **Langevin Equation** to simulate realistic atomic motion:
+
+![](images/langevin%20eq2.png)
+![](images/langevin%20eq2_where.png)
+
+
+### **4. Diffusion on a PES**
+
+Atoms on a Potential Energy Surface (PES) tend to stay in low-energy regions, such as hollow sites, where they are most stable. For an atom to move to a neighboring site, it must overcome an energy barrier. This natural diffusion process is typically slow because:
+
+* The atom spends most of its time vibrating within the energy minima. 
+* Transitions to neighboring sites occur infrequently, as they require significant thermal activation. 
+
+To accelerate diffusion, this project introduces lateral forces, which effectively lower the energy barriers, making transitions more frequent. The reduced energy barrier is described by the equation:
+
+![](images/reduced_energy_barrier.png)
+![](images/reduced_where.png)
+This formulation ensures that lateral forces assist atomic transitions by lowering the energy barriers, facilitating faster diffusion.
 ### **3. Velocity Verlet Algorithm**
+To compute the atom's motion, the **Velocity Verlet algorithm** is used for integration. This method updates the atom's position, velocity, and acceleration iteratively, through these steps:
 
-The velocity Verlet algorithm integrates motion iteratively:
-1. Update position:
-   \[
-   \vec{r}(t + \Delta t) = \vec{r}(t) + \vec{v}(t)\Delta t + \frac{1}{2}\vec{a}(t)(\Delta t)^2
-   \]
-2. Compute new acceleration from forces:
-   \[
-   \vec{a}(t + \Delta t) = \frac{\vec{F}(t + \Delta t)}{m}
-   \]
-3. Update velocity:
-   \[
-   \vec{v}(t + \Delta t) = \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t + \Delta t)}{2}\Delta t
-   \]
+![](images/velocity_verlet_alg.png)
+
+Here, \(r(t)\) and \(v(t)\) are the particle's position and velocity at time \(t\), \(F(t)\) is the force acting on the particle at time \(t\), \(m\) is the particle’s mass, \(Delta t\) is the time step, and \(v(t')\) is the intermediate velocity after the first update.
+
+
+### **5. Applications**
+
+This simulation is useful for:
+- Understanding atomic diffusion on surfaces like graphene.
+- Exploring the effects of thermal noise and external forces on atomic motion.
+- Validating potential energy models derived from experimental or ab initio data.
+
 
 ---
 
+## **Computational Key Features for Better Understanding of the program:**
+
+- **PES Calculation:** 
+
+   It computes the potential energy landscape for an atom on a surface.It also includes periodic contributions from the lattice geometry.
+- **Force Computation:** 
+
+  Derives force components \(Fx, Fy, Fz) from the PES gradients.
+- **Interaction Energy:** 
+
+  Evaluates energy as a function of atomic separation or stacking configuration.
+- **Trajectory Simulation:** 
+
+  Simulates atomic motion using the velocity Verlet algorithm and **Langevin equation**.
+  
+  Adds thermal noise and friction for realistic dynamics.
+- **Visualization:** 
+  Generates plots for:
+* PES. 
+* Force components. 
+* Interaction energy. 
+* Atomic trajectories overlaid on the PES. 
+
+**To show some examples of the generated results:**
+![](images/force_z.png)
+![PES plot:](images/pes_plot.png)
+![](images/trajectory_simulation.png)
+
+---
 ## **Installation**
 
 1. Clone the repository:
+
    ```bash
-   git clone <repository-url>
+   
+   git clone https://github.com/Mohamed-mahi/TrajectorySim.git
    cd TrajectorySim
+
+2. Install Dependencies
+
+   Install required libraries using ```requirements.txt```:
+
+   ```bash 
+   pip install -r requirements.txt
+   ```
+  
+3. Verify the Installation
+   Check that the program is ready by running:
+
+   ```python    
+   python main.py --help 
+   ```
