@@ -91,6 +91,7 @@ This simulation is useful for:
 * Atomic trajectories overlaid on the PES. 
 
 **To show some examples of the generated results:**
+
 ![](images/force_z.png)
 ![PES plot:](images/pes_plot.png)
 ![](images/trajectory_simulation.png)
