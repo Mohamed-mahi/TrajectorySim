@@ -129,13 +129,10 @@ These energy profiles help define the forces that affect atomic motion in the si
 Derives force components \(Fx, Fy, Fz) from the PES gradients.
   
 - **Trajectory Simulation:** 
+
 ![](images/trajectory_simulation.png)
 
-  Simulates atomic motion using the velocity Verlet algorithm and Langevin equation.
-  
-  Adds thermal noise and friction for realistic dynamics.
-
-
+ Simulates atomic motion using the velocity Verlet algorithm and Langevin equation. Adds thermal noise and friction for realistic dynamics.
 
 ---
 ## **Installation**
