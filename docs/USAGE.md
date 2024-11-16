@@ -118,12 +118,8 @@ GRID_PARAMETERS = {
 
 **Note:**  Reducing resolution might affect the accuracy of force calculations and plots, so choose a reasonable value.
 
-<<<<<<< HEAD
-=======
 - someone can also reduce the number of particles `num_particles` in `simulation_config.py` to speed up the simulations.
 
-
->>>>>>> 1dcc2c3648c8aafa47991807cec1cba7d30a7e7e
 ## 6. Testing
 To ensure that the program works correctly, run the test suite:
 
@@ -138,8 +134,3 @@ To ensure that the program works correctly, run the test suite:
 * Validates updates to positions, velocities, and accelerations using the velocity Verlet algorithm for realistic motion. This is done by testing the **trajectory simulation** ```python .\test_simulation.py```.
 
 Running the tests and visualising the output someone confirms that these key program components represent the simulation results accurately and functioning as expected.
-<<<<<<< HEAD
- 
-=======
- 
->>>>>>> 1dcc2c3648c8aafa47991807cec1cba7d30a7e7e
