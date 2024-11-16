@@ -118,6 +118,8 @@ GRID_PARAMETERS = {
 
 **Note:**  Reducing resolution might affect the accuracy of force calculations and plots, so choose a reasonable value.
 
+- someone can also reduce the number of particles `num_particles` in `simulation_config.py` to speed up the simulations.
+
 ## 6. Testing
 To ensure that the program works correctly, run the test suite:
 
