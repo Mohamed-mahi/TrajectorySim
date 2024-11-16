@@ -23,8 +23,8 @@ def plot_interaction_energy_y_axis(pes, y_range, z_values, save_dir="plots/3_int
 
     # Save and show
     plt.savefig(f"{save_dir}/interaction_energy_y_axis.png")
-    if not os.getenv("PYTEST_RUNNING"):
-        plt.show()
+    if not os.getenv("PYTEST_RUNNING"): # Skip plt.show() during tests
+        plt.show()  # pragma: no cover
     plt.close()
 
 
@@ -57,6 +57,6 @@ def plot_interaction_energy_stacking(pes, z_values, save_dir="plots/3_interactio
 
     # Save and show
     plt.savefig(f"{save_dir}/interaction_energy_stacking.png")
-    if not os.getenv("PYTEST_RUNNING"):
-        plt.show()
+    if not os.getenv("PYTEST_RUNNING"): # Skip plt.show() during tests
+        plt.show() # pragma: no cover
     plt.close()

@@ -11,7 +11,7 @@ def plot_force_components(X, Y, forces_x, forces_y, forces_z, save_dir="plots/2_
     plt.title("Force X Component")
     plt.savefig(f"{save_dir}/force_x.png")
     if not os.getenv("PYTEST_RUNNING"):  # Skip plt.show() during tests
-        plt.show()
+        plt.show() # pragma: no cover
     plt.close()
 
     # Y-component
@@ -20,8 +20,8 @@ def plot_force_components(X, Y, forces_x, forces_y, forces_z, save_dir="plots/2_
     plt.colorbar(label="Force Y")
     plt.title("Force Y Component")
     plt.savefig(f"{save_dir}/force_y.png")
-    if not os.getenv("PYTEST_RUNNING"):
-        plt.show()
+    if not os.getenv("PYTEST_RUNNING"): # Skip plt.show() during tests
+        plt.show()  # pragma: no cover 
     plt.close()
 
     # Z-component
@@ -30,6 +30,6 @@ def plot_force_components(X, Y, forces_x, forces_y, forces_z, save_dir="plots/2_
     plt.colorbar(label="Force Z")
     plt.title("Force Z Component")
     plt.savefig(f"{save_dir}/force_z.png")
-    if not os.getenv("PYTEST_RUNNING"):
-        plt.show()
+    if not os.getenv("PYTEST_RUNNING"):  # Skip plt.show() during tests
+        plt.show()  # pragma: no cover
     plt.close()

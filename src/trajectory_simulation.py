@@ -89,6 +89,6 @@ def trajectories_with_potential(pes, dt, gamma, temp, mass, nsteps, num_particle
     # Save and show the plot
     plot_path = os.path.join(save_dir, "trajectory_simulation.png")
     plt.savefig(plot_path)
-    if not os.getenv("PYTEST_RUNNING"):
-        plt.show()
+    if not os.getenv("PYTEST_RUNNING"): # Skip plt.show() during tests
+        plt.show() # pragma: no cover
     plt.close()
