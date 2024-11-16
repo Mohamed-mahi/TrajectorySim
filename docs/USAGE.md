@@ -96,6 +96,31 @@ If the simulation runs slowly:
 - Reduce the number of steps (`nsteps`) in the `SIMULATION_PARAMETERS` section.  
 - Lower the grid resolution in the `GRID_PARAMETERS` section to reduce computational load.
 
+Tutorial on how to adjust grid resolution:
+
+1. Open the `simulation_config.py` file.
+2. Locate the `GRID_PARAMETERS` section:
+
+```Python
+GRID_PARAMETERS = {
+    "x_min": -10,  # Minimum x-coordinate
+    "x_max": 10,  # Maximum x-coordinate
+    "y_min": -10,  # Minimum y-coordinate
+    "y_max": 10,  # Maximum y-coordinate
+    "resolution": 100,  # Grid resolution (reduce this)
+}
+```
+3. Lower the resolution value. For example:
+```Python
+"resolution": 50,  # Reduced grid resolution
+```
+4. Save the file and re-run the simulation.
+
+**Note:**  Reducing resolution might affect the accuracy of force calculations and plots, so choose a reasonable value.
+
+- someone can also reduce the number of particles `num_particles` in `simulation_config.py` to speed up the simulations.
+
+
 ## 6. Testing
 To ensure that the program works correctly, run the test suite:
 
