@@ -101,11 +101,12 @@ To ensure that the program works correctly, run the test suite:
 
 ``` pytest tests/```
 
-What the Tests Validate:
-* Correct PES calculations. 
-* Accurate force computations.
-* Proper trajectory simulations.
+WHAT the Tests Validate and WHY:
+*Verifies accurate computation of the Potential Energy Surface (**PES**), this is by testing ```python .\test_pes.py```, This ensuring correct energy profiles for AA and AB stacking configurations.
+*Confirms that **force components** derived from the PES gradients are accurate and align with theoretical expectations. This is done by testing ```python .\test_force_components.py```
+*The program tests interaction energy profiles at various distances ```python .\test_interaction_energy.py``` to ensure a realistic balance of repulsion and attraction. This confirms stable interactions between atoms, reflecting natural behavior in real materials.
+*Validates updates to positions, velocities, and accelerations using the velocity Verlet algorithm for realistic motion. This is done by testing the trajectory simulation ```python .\test_simulation.py```.
 
- Running the tests will confirm that all components of the program are functioning as expected.
-
+Running the tests and visualising the output someone confirms that these key program components represent the simulation results accurately and functioning as expected.
+ 
 
